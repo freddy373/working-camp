@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Working Camp 2026</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        /* =====================================================
+           RESET & GLOBAL STYLES
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 18px;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #f8f5f0;
+            color: #10283b;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        /* =====================================================
+           HEADER & LOGO
+        ===================================================== */
+
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            height: 100px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .header-inner {
+            width: min(1200px, 92%);
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .church-name {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: white;
+        }
+
+        .church-mark {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(247, 148, 0, 0.8);
+            border-radius: 50%;
+            color: #f79400;
+            font-size: 18px;
+        }
+
+        .church-text strong {
+            display: block;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .church-text span {
+            display: block;
+            margin-top: 2px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+        }
+
+        .header-logo {
+            position: absolute;
+            left: 50%;
+            top: 12px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+        }
+
+        /* =====================================================
+           LANGUAGE DROPDOWN (Click-to-Toggle Fixed)
+        ===================================================== */
+
+        .language {
+            position: relative;
+        }
+
+        .language-button {
+            height: 46px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 20px;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .language-button:hover,
+        .language.is-open .language-button {
+            background: #f79400;
+            border-color: #f79400;
+            color: #10283b;
+        }
+
+        .language-arrow {
+            font-size: 10px;
+            transition: transform 0.25s ease;
+        }
+
+        .language.is-open .language-arrow {
+            transform: rotate(180deg);
+        }
+
+        .language-menu {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            width: 180px;
+            padding: 8px;
+            border-radius: 14px;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .language.is-open .language-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .language-menu button {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: #173149;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .language-menu button:hover {
+            background: #f8f5f0;
+            color: #e58400;
+        }
+
+        /* =====================================================
+           HERO SECTION
+        ===================================================== */
+
+        .hero {
+            min-height: 760px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(7, 29, 45, 0.95) 0%,
+                    rgba(7, 29, 45, 0.82) 40%,
+                    rgba(7, 29, 45, 0.25) 80%
+                ),
+                url("bg.png");
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero-inner {
+            width: min(1200px, 92%);
+            margin: 80px auto 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            width: min(680px, 100%);
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: #f79400;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+        }
+
+        .hero-kicker::before {
+            content: "";
+            width: 36px;
+            height: 3px;
+            background: #f79400;
+            border-radius: 2px;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(56px, 7vw, 92px);
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            color: #f79400;
+        }
+
+        .hero-motto {
+            margin-top: 25px;
+            color: #ffffff;
+            font-family: "Playfair Display", serif;
+            font-size: 32px;
+            font-style: italic;
+        }
+
+        .hero-verse {
+            margin-top: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .hero-description {
+            margin-top: 24px;
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .hero-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            background: #f79400;
+            color: #10283b;
+            font-size: 15px;
+            font-weight: 800;
+            box-shadow: 0 10px 25px rgba(247, 148, 0, 0.35);
+            transition: 0.25s ease;
+        }
+
+        .hero-primary:hover {
+            transform: translateY(-3px);
+            background: #ff9e0a;
+            box-shadow: 0 15px 30px rgba(247, 148, 0, 0.45);
+        }
+
+        .hero-secondary {
+            padding: 16px 28px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            transition: 0.25s ease;
+        }
+
+        .hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: white;
+        }
+
+        /* =====================================================
+           INFO STRIP (Redesigned Floating Cards)
+        ===================================================== */
+
+        .info-strip {
+            position: relative;
+            z-index: 5;
+            width: min(1120px, 92%);
+            margin: -50px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .info-card {
+            background: #ffffff;
+            padding: 32px 28px;
+            border-radius: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: 0 18px 40px rgba(16, 40, 59, 0.08);
+            border: 1px solid #eef1f4;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(16, 40, 59, 0.12);
+        }
+
+        .info-icon-box {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+            color: #e58400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+            box-shadow: inset 0 0 0 1px rgba(229, 132, 0, 0.15);
+        }
+
+        .info-card-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-card small {
+            display: inline-block;
+            color: #e58400;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .info-card strong {
+            display: block;
+            color: #10283b;
+            font-size: 19px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+
+        .info-card span {
+            color: #687680;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* =====================================================
+           ABOUT SECTION (Cleaned Up & Image Removed)
+        ===================================================== */
+
+        .about {
+            width: min(900px, 92%);
+            margin: 0 auto;
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .section-label {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #e58400;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .about h2 {
+            font-family: "Playfair Display", serif;
+            color: #10283b;
+            font-size: clamp(38px, 4.5vw, 54px);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .about h2 span {
+            color: #e58400;
+        }
+
+        .about p {
+            color: #4a5a67;
+            font-size: 19px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-highlight {
+            color: #10283b;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           WHAT WE DO
+        ===================================================== */
+
+        .activities {
+            padding: 100px 0;
+            background: #0f2334;
+            color: white;
+        }
+
+        .activities-inner {
+            width: min(1120px, 92%);
+            margin: 0 auto;
+        }
+
+        .activities-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .activities h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 48px;
+            line-height: 1.1;
+        }
+
+        .activities-intro {
+            max-width: 460px;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .activity-card {
+            padding: 32px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            transition: 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-6px);
+            border-color: #f79400;
+            background: rgba(247, 148, 0, 0.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-number {
+            color: #f79400;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .activity-icon {
+            margin: 24px 0 18px;
+            font-size: 38px;
+        }
+
+        .activity-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* =====================================================
+           REGISTRATION & MULTI-PERSON BOOKING FORM
+        ===================================================== */
+
+        .registration {
+            padding: 100px 0;
+            background: #f8f5f0;
+        }
+
+        .registration-inner {
+            width: min(1000px, 92%);
+            margin: 0 auto;
+        }
+
+        .registration-heading {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .registration-heading h2 {
+            font-family: "Playfair Display", serif;
+            color: #10283b;
+            font-size: clamp(40px, 4.5vw, 54px);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .registration-heading p {
+            color: #566774;
+            font-size: 17px;
+        }
+
+        /* Attendee Selector Block */
+        .attendee-count-card {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(16, 40, 59, 0.06);
+            border: 1px solid #e2d9cc;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .attendee-count-info h3 {
+            font-size: 20px;
+            color: #10283b;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .attendee-count-info p {
+            font-size: 14px;
+            color: #687680;
+        }
+
+        .attendee-select-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .attendee-select-wrapper label {
+            font-size: 14px;
+            font-weight: 800;
+            color: #10283b;
+        }
+
+        .attendee-select {
+            height: 52px;
+            padding: 0 24px;
+            border: 2px solid #e2d9cc;
+            border-radius: 12px;
+            background: #fcfbfa;
+            color: #10283b;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        .attendee-select:focus {
+            border-color: #f79400;
+            background: white;
+        }
+
+        /* Attendee Form Block */
+        .attendees-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .attendee-card {
+            background: white;
+            border: 1px solid #e2d9cc;
+            border-radius: 22px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(16, 40, 59, 0.05);
+            position: relative;
+        }
+
+        .attendee-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+            border-bottom: 2px solid #f4efe6;
+        }
+
+        .attendee-number-badge {
+            width: 38px;
+            height: 38px;
+            background: #f79400;
+            color: #10283b;
+            font-size: 16px;
+            font-weight: 800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .attendee-card-header h4 {
+            font-size: 22px;
+            color: #10283b;
+            font-weight: 800;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .field {
+            min-width: 0;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #10283b;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            height: 54px;
+            padding: 0 18px;
+            border: 1.5px solid #dcdfe3;
+            border-radius: 12px;
+            outline: none;
+            background: #fbfbfa;
+            color: #10283b;
+            font-size: 15px;
+            transition: 0.2s ease;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            background: white;
+            border-color: #f79400;
+            box-shadow: 0 0 0 4px rgba(247, 148, 0, 0.12);
+        }
+
+        /* Duration Selection */
+        .duration-field {
+            grid-column: 1 / -1;
+            margin-top: 6px;
+        }
+
+        .duration-label {
+            display: block;
+            margin-bottom: 12px;
+            color: #10283b;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .duration-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .duration-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .duration-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .duration-card {
+            padding: 18px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 2px solid #dcdfe3;
+            border-radius: 14px;
+            background: #fbfbfa;
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .duration-card strong {
+            color: #10283b;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .duration-card span {
+            color: #687680;
+            font-size: 12px;
+        }
+
+        .duration-card .price-tag {
+            margin-top: 4px;
+            color: #e58400;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .duration-option:hover .duration-card {
+            border-color: #f79400;
+        }
+
+        .duration-option input:checked + .duration-card {
+            border-color: #f79400;
+            background: #fff8ee;
+            box-shadow: 0 0 0 3px rgba(247, 148, 0, 0.12);
+        }
+
+        .duration-option input:checked + .duration-card strong {
+            color: #e58400;
+        }
+
+        /* Bus Checkbox Card */
+        .bus-option-card {
+            grid-column: 1 / -1;
+            margin-top: 8px;
+            padding: 18px 22px;
+            background: #f5f8fa;
+            border: 1.5px dashed #a0b0bc;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .bus-option-card:hover {
+            border-color: #f79400;
+            background: #fff8ee;
+        }
+
+        .bus-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .bus-option-card input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #f79400;
+            cursor: pointer;
+        }
+
+        .bus-option-card-text strong {
+            display: block;
+            color: #10283b;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .bus-option-card-text span {
+            color: #687680;
+            font-size: 12px;
+        }
+
+        .bus-price-tag {
+            background: #e58400;
+            color: white;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* Checkout Summary Box */
+        .checkout-box {
+            background: #10283b;
+            color: white;
+            border-radius: 22px;
+            padding: 40px;
+            margin-top: 35px;
+            box-shadow: 0 20px 45px rgba(16, 40, 59, 0.2);
+        }
+
+        .checkout-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .checkout-summary-title {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .checkout-summary-price {
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            color: #f79400;
+            font-weight: 800;
+        }
+
+        .confirmation-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            line-height: 1.5;
+            cursor: pointer;
+            margin-bottom: 28px;
+        }
+
+        .confirmation-check input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #f79400;
+        }
+
+        .pay-button {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: none;
+            border-radius: 12px;
+            background: #f79400;
+            color: #10283b;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .pay-button:hover {
+            transform: translateY(-2px);
+            background: #ffa820;
+            box-shadow: 0 12px 30px rgba(247, 148, 0, 0.35);
+        }
+
+        .pay-button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .payment-note {
+            text-align: center;
+            margin-top: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            padding: 40px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            background: #081622;
+            color: white;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .footer-center p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .footer-right {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           RTL OVERRIDES
+        ===================================================== */
+
+        html[dir="rtl"] .language-menu button {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .church-name {
+            flex-direction: row-reverse;
+        }
+
+        html[dir="rtl"] .hero {
+            background:
+                linear-gradient(
+                    270deg,
+                    rgba(7, 29, 45, 0.95) 0%,
+                    rgba(7, 29, 45, 0.82) 40%,
+                    rgba(7, 29, 45, 0.25) 80%
+                ),
+                url("bg.png");
+            background-size: cover;
+            background-position: center;
+        }
+
+        html[dir="rtl"] .hero-content {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .hero-kicker {
+            flex-direction: row-reverse;
+        }
+
+        html[dir="rtl"] .field label,
+        html[dir="rtl"] .duration-label {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .confirmation-check {
+            text-align: right;
+        }
+
+        /* =====================================================
+           RESPONSIVE BREAKPOINTS
+        ===================================================== */
+
+        @media (max-width: 950px) {
+            .info-strip {
+                grid-template-columns: 1fr;
+                margin-top: -30px;
+            }
+
+            .activity-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            html {
+                font-size: 16px;
+            }
+
+            .church-name {
+                display: none;
+            }
+
+            .header-logo {
+                top: 15px;
+                width: 65px;
+                height: 65px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-primary, .hero-secondary {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .duration-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .attendee-card {
+                padding: 24px 18px;
+            }
+
+            .checkout-box {
+                padding: 28px 20px;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="header">
+        <div class="header-inner">
+
+            <div class="church-name">
+                <div class="church-mark">✝</div>
+                <div class="church-text">
+                    <strong>ST. MARY CHURCH</strong>
+                    <span>FAGGALA · EGYPT</span>
+                </div>
+            </div>
+
+            <div class="header-logo">
+                <img src="logo.png" alt="Working Camp logo">
+            </div>
+
+            <!-- Language Switcher -->
+            <div class="language" id="languageDropdown">
+                <button type="button" class="language-button" id="languageBtn">
+                    <span id="currentLanguage">English</span>
+                    <span class="language-arrow">▼</span>
+                </button>
+
+                <div class="language-menu" id="languageMenu">
+                    <button type="button" data-lang="en">English</button>
+                    <button type="button" data-lang="fr">Français</button>
+                    <button type="button" data-lang="ar">العربية</button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =====================================================
+         HERO SECTION
+    ===================================================== -->
+
+    <main>
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="hero-content">
+
+                    <div class="hero-kicker" data-i18n="heroKicker">
+                        ST. MARY CHURCH · FAGGALA
+                    </div>
+
+                    <h1>
+                        <span data-i18n="workingCamp">WORKING</span><br>
+                        <span data-i18n="campWord">CAMP</span> <span>2026</span>
+                    </h1>
+
+                    <div class="hero-motto" data-i18n="motto">
+                        «from God to God»
+                    </div>
+
+                    <div class="hero-verse" data-i18n="verse">
+                        ROMANS 11:36
+                    </div>
+
+                    <p class="hero-description" data-i18n="heroDescription">
+                        A few days of love and service. Together we build, prepare, and serve those in need with our hands and with our hearts.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#register" class="hero-primary">
+                            <span data-i18n="registerNow">REGISTER NOW</span>
+                            <span>↓</span>
+                        </a>
+
+                        <a href="#about" class="hero-secondary" data-i18n="discover">
+                            DISCOVER THE CAMP
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             INFO STRIP (Floating Elevated Cards)
+        ===================================================== -->
+
+        <section class="info-strip">
+
+            <div class="info-card">
+                <div class="info-icon-box">📅</div>
+                <div class="info-card-content">
+                    <small data-i18n="datesTitle">DATES</small>
+                    <strong>August 15 – 20, 2026</strong>
+                    <span data-i18n="sixDays">6 days of service</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon-box">📍</div>
+                <div class="info-card-content">
+                    <small data-i18n="locationTitle">LOCATION</small>
+                    <strong>St. Mary Church</strong>
+                    <span>Faggala, Cairo, Egypt</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon-box">🤝</div>
+                <div class="info-card-content">
+                    <small data-i18n="joinTitle">WHO CAN JOIN</small>
+                    <strong data-i18n="joinText">Everyone is welcome!</strong>
+                    <span data-i18n="joinSub">Open for all ages</span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ABOUT SECTION
+        ===================================================== -->
+
+        <section class="about" id="about">
+            <span class="section-label" data-i18n="aboutKicker">
+                ABOUT THE CAMP
+            </span>
+
+            <h2 data-i18n="aboutTitle">
+                Working together.<br>
+                Giving <span>together.</span>
+            </h2>
+
+            <p data-i18n="aboutP1">
+                The Working Camp is a mission of love and service organized by St. Mary Church – Faggala.
+            </p>
+
+            <p data-i18n="aboutP2">
+                We gather to make beds, desks, drawers, food, and more, and deliver them to families in need for free.
+            </p>
+
+            <p>
+                <span data-i18n="aboutP3">It’s not just work…</span>
+                <span class="about-highlight" data-i18n="aboutHighlight">it’s worship in action.</span>
+            </p>
+        </section>
+
+
+        <!-- =====================================================
+             WHAT WE DO
+        ===================================================== -->
+
+        <section class="activities">
+            <div class="activities-inner">
+
+                <div class="activities-heading">
+                    <div>
+                        <span class="section-label" data-i18n="whatKicker">
+                            WHAT WE DO
+                        </span>
+                        <h2 data-i18n="activitiesTitle">Hands that serve.</h2>
+                    </div>
+
+                    <p class="activities-intro" data-i18n="activitiesIntro">
+                        We work together, create together, and give what we make to families who need it.
+                    </p>
+                </div>
+
+                <div class="activity-grid">
+
+                    <div class="activity-card">
+                        <div class="activity-number">01</div>
+                        <div class="activity-icon">🛠️</div>
+                        <p data-i18n="activity1">Build beds, desks, drawers, and other furniture.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-number">02</div>
+                        <div class="activity-icon">🍲</div>
+                        <p data-i18n="activity2">Prepare and pack food and basic needs.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-number">03</div>
+                        <div class="activity-icon">🚚</div>
+                        <p data-i18n="activity3">Organize and distribute everything to families in need.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-number">04</div>
+                        <div class="activity-icon">❤️</div>
+                        <p data-i18n="activity4">Pray, grow, and build friendships.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             REGISTRATION & DYNAMIC MULTI-PERSON FORM
+        ===================================================== -->
+
+        <section class="registration" id="register">
+            <div class="registration-inner">
+
+                <div class="registration-heading">
+                    <span class="section-label" data-i18n="registerKicker">REGISTRATION</span>
+                    <h2 data-i18n="registerTitle">Your place starts here.</h2>
+                    <p data-i18n="registerDescription">
+                        You can register for yourself or book for multiple people at the same time.
+                    </p>
+                </div>
+
+                <form id="registrationForm">
+
+                    <!-- Attendee Count Selector -->
+                    <div class="attendee-count-card">
+                        <div class="attendee-count-info">
+                            <h3 data-i18n="howManyPeople">How many people are registering?</h3>
+                            <p data-i18n="howManySub">Select total number of participants to fill their details.</p>
+                        </div>
+
+                        <div class="attendee-select-wrapper">
+                            <label for="attendeeCountSelect" data-i18n="countLabel">ATTENDEES:</label>
+                            <select id="attendeeCountSelect" class="attendee-select">
+                                <option value="1">1 Person</option>
+                                <option value="2">2 People</option>
+                                <option value="3">3 People</option>
+                                <option value="4">4 People</option>
+                                <option value="5">5 People</option>
+                                <option value="6">6 People</option>
+                                <option value="7">7 People</option>
+                                <option value="8">8 People</option>
+                                <option value="9">9 People</option>
+                                <option value="10">10 People</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Attendee Cards Container -->
+                    <div id="attendeesContainer" class="attendees-container"></div>
+
+                    <!-- Total Price & Checkout Card -->
+                    <div class="checkout-box">
+                        <div class="checkout-summary">
+                            <div>
+                                <div class="checkout-summary-title" data-i18n="totalFeeLabel">TOTAL PARTICIPATION FEE</div>
+                                <span style="font-size: 13px; opacity: 0.7;" data-i18n="calculatedNote">Calculated automatically based on stay choices</span>
+                            </div>
+                            <div class="checkout-summary-price" id="totalPriceDisplay">
+                                0 EGP
+                            </div>
+                        </div>
+
+                        <label class="confirmation-check">
+                            <input type="checkbox" required>
+                            <span data-i18n="confirmation">
+                                I confirm that all provided information for all attendees is accurate.
+                            </span>
+                        </label>
+
+                        <button type="submit" class="pay-button">
+                            <span aria-hidden="true">💳</span>
+                            <span data-i18n="continuePayment">PROCEED TO PAYMENT</span>
+                            <span>→</span>
+                        </button>
+
+                        <p class="payment-note" data-i18n="securePayment">
+                            Secure payment powered by Paymob (Visa / Mastercard / Mobile Wallets).
+                        </p>
+                    </div>
+
+                </form>
+
+            </div>
+        </section>
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="logo.png" alt="Working Camp">
+        </div>
+
+        <div class="footer-center">
+            <p>St. Mary Church – Faggala</p>
+        </div>
+
+        <div class="footer-right">
+            © 2026 Working Camp. <span data-i18n="rights">All rights reserved.</span>
+        </div>
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* Pricing Constants (EGP) */
+        const PRICE_MAP = {
+            '2-nights': 150,
+            '1-night': 100,
+            'day-use': 50
+        };
+
+        const BUS_FEE = 100; // Bus fare per person
+
+        const translations = {
+            en: {
+                heroKicker: "ST. MARY CHURCH · FAGGALA",
+                workingCamp: "WORKING",
+                campWord: "CAMP",
+                motto: "«from God to God»",
+                verse: "ROMANS 11:36",
+                heroDescription: "A few days of love and service. Together we build, prepare, and serve those in need with our hands and with our hearts.",
+                registerNow: "REGISTER NOW",
+                discover: "DISCOVER THE CAMP",
+                datesTitle: "DATES",
+                sixDays: "6 days of service",
+                locationTitle: "LOCATION",
+                joinTitle: "WHO CAN JOIN",
+                joinText: "Everyone is welcome!",
+                joinSub: "Open for all ages",
+                aboutKicker: "ABOUT THE CAMP",
+                aboutTitle: "Working together.<br>Giving <span>together.</span>",
+                aboutP1: "The Working Camp is a mission of love and service organized by St. Mary Church – Faggala.",
+                aboutP2: "We gather to make beds, desks, drawers, food, and more, and deliver them to families in need for free.",
+                aboutP3: "It’s not just work…",
+                aboutHighlight: "it’s worship in action.",
+                whatKicker: "WHAT WE DO",
+                activitiesTitle: "Hands that serve.",
+                activitiesIntro: "We work together, create together, and give what we make to families who need it.",
+                activity1: "Build beds, desks, drawers, and other furniture.",
+                activity2: "Prepare and pack food and basic needs.",
+                activity3: "Organize and distribute everything to families in need.",
+                activity4: "Pray, grow, and build friendships.",
+                registerKicker: "REGISTRATION",
+                registerTitle: "Your place starts here.",
+                registerDescription: "You can register for yourself or book for multiple people at the same time.",
+                howManyPeople: "How many people are registering?",
+                howManySub: "Select total number of participants to fill their details.",
+                countLabel: "ATTENDEES:",
+                personLabel: "Person",
+                fullName: "FULL NAME",
+                fullNamePlaceholder: "Enter full name",
+                email: "EMAIL ADDRESS",
+                emailPlaceholder: "Enter email address",
+                phone: "PHONE NUMBER",
+                phonePlaceholder: "01XXXXXXXXX",
+                nationalId: "NATIONAL ID",
+                nationalIdPlaceholder: "14 digits",
+                workField: "SERVICE / WORK FIELD",
+                selectWorkField: "Select Service Field",
+                fieldKids: "Children (أطفال)",
+                fieldProduction: "Production Line (خط إنتاج)",
+                fieldIroning: "Ironing (مكوة)",
+                fieldWardrobes: "Wardrobes (دواليب)",
+                fieldDesks: "Desks (مكاتب)",
+                fieldBeds: "Beds (سراير)",
+                tshirtSize: "T-SHIRT SIZE",
+                selectSize: "Select Size",
+                stayDuration: "HOW WILL THIS PERSON PARTICIPATE?",
+                twoNights: "2 NIGHTS",
+                twoNightsDesc: "Full stay experience",
+                oneNight: "1 NIGHT",
+                oneNightDesc: "Overnight stay",
+                dayUse: "DAY USE",
+                dayUseDesc: "Daytime participation",
+                busOptionTitle: "Bus Transportation",
+                busOptionDesc: "Check if this person requires church bus transport",
+                totalFeeLabel: "TOTAL PARTICIPATION FEE",
+                calculatedNote: "Calculated automatically based on stay choices",
+                confirmation: "I confirm that all provided information for all attendees is accurate.",
+                continuePayment: "PROCEED TO PAYMENT",
+                securePayment: "Secure payment powered by Paymob (Visa / Mastercard / Mobile Wallets).",
+                rights: "All rights reserved."
+            },
+
+            fr: {
+                heroKicker: "ÉGLISE SAINTE-MARIE · FAGGALA",
+                workingCamp: "CAMP",
+                campWord: "DE TRAVAIL",
+                motto: "« de Dieu à Dieu »",
+                verse: "ROMAINS 11:36",
+                heroDescription: "Quelques jours d’amour et de service. Ensemble, nous construisons, préparons et servons ceux qui sont dans le besoin.",
+                registerNow: "S’INSCRIRE",
+                discover: "DÉCOUVRIR LE CAMP",
+                datesTitle: "DATES",
+                sixDays: "6 jours de service",
+                locationTitle: "LIEU",
+                joinTitle: "QUI PEUT PARTICIPER ?",
+                joinText: "Tout le monde est le bienvenu !",
+                joinSub: "Ouvert à tous",
+                aboutKicker: "À PROPOS DU CAMP",
+                aboutTitle: "Travailler ensemble.<br>Donner <span>ensemble.</span>",
+                aboutP1: "Le Camp de Travail est une mission d’amour et de service organisée par l’Église Sainte-Marie – Faggala.",
+                aboutP2: "Nous nous réunissons pour fabriquer des lits, bureaux, tiroirs et repas pour les offrir gratuitement aux familles.",
+                aboutP3: "Ce n’est pas seulement du travail…",
+                aboutHighlight: "c’est une adoration vécue.",
+                whatKicker: "CE QUE NOUS FAISONS",
+                activitiesTitle: "Des mains qui servent.",
+                activitiesIntro: "Nous travaillons ensemble, créons ensemble et donnons ce que nous fabriquons.",
+                activity1: "Construire des lits, des bureaux, des tiroirs et d’autres meubles.",
+                activity2: "Préparer et emballer la nourriture et les produits de première nécessité.",
+                activity3: "Organiser et distribuer aux familles dans le besoin.",
+                activity4: "Prier, grandir et créer des liens d’amitié.",
+                registerKicker: "INSCRIPTION",
+                registerTitle: "Votre place commence ici.",
+                registerDescription: "Vous pouvez vous inscrire vous-même ou inscrire plusieurs personnes en même temps.",
+                howManyPeople: "Combien de personnes inscrivez-vous ?",
+                howManySub: "Sélectionnez le nombre total de participants pour remplir leurs coordonnées.",
+                countLabel: "PARTICIPANTS:",
+                personLabel: "Personne",
+                fullName: "NOM COMPLET",
+                fullNamePlaceholder: "Entrez le nom complet",
+                email: "ADRESSE E-MAIL",
+                emailPlaceholder: "Entrez l'adresse e-mail",
+                phone: "NUMÉRO DE TÉLÉPHONE",
+                phonePlaceholder: "01XXXXXXXXX",
+                nationalId: "NUMÉRO NATIONAL",
+                nationalIdPlaceholder: "14 chiffres",
+                workField: "DOMAINE DE SERVICE",
+                selectWorkField: "Choisir le domaine",
+                fieldKids: "Enfants (أطفال)",
+                fieldProduction: "Ligne de Production (خط إنتاج)",
+                fieldIroning: "Repassage (مكوة)",
+                fieldWardrobes: "Armoires (دواليب)",
+                fieldDesks: "Bureaux (مكاتب)",
+                fieldBeds: "Lits (سراير)",
+                tshirtSize: "TAILLE DE T-SHIRT",
+                selectSize: "Choisir la taille",
+                stayDuration: "COMMENT CETTE PERSONNE PARTICIPERA-T-ELLE ?",
+                twoNights: "2 NUITS",
+                twoNightsDesc: "Séjour complet",
+                oneNight: "1 NUIT",
+                oneNightDesc: "Une nuitée",
+                dayUse: "À LA JOURNÉE",
+                dayUseDesc: "Participation de jour",
+                busOptionTitle: "Transport en bus",
+                busOptionDesc: "Cochez si cette personne a besoin du bus de l'église",
+                totalFeeLabel: "FRAIS TOTAL DE PARTICIPATION",
+                calculatedNote: "Calculé automatiquement selon la durée du séjour",
+                confirmation: "Je confirme que toutes les informations fournies sont correctes.",
+                continuePayment: "PROCÉDER AU PAIEMENT",
+                securePayment: "Paiement sécurisé par Paymob.",
+                rights: "Tous droits réservés."
+            },
+
+            ar: {
+                heroKicker: "كنيسة السيدة العذراء مريم · الفجالة",
+                workingCamp: "معسكر",
+                campWord: "العمل",
+                motto: "«منه وله»",
+                verse: "رومية 11:36",
+                heroDescription: "أيام من المحبة والخدمة. نجتمع معًا لنصنع ونجهز ونخدم المحتاجين بأيدينا وبقلوبنا.",
+                registerNow: "سجّل الآن",
+                discover: "اكتشف المعسكر",
+                datesTitle: "المواعيد",
+                sixDays: "6 أيام من الخدمة",
+                locationTitle: "المكان",
+                joinTitle: "من يمكنه المشاركة؟",
+                joinText: "الجميع مرحب بهم!",
+                joinSub: "متاح لجميع الأعمار",
+                aboutKicker: "عن المعسكر",
+                aboutTitle: "نعمل معًا.<br>ونعطي <span>معًا.</span>",
+                aboutP1: "معسكر العمل هو خدمة للمحبة والعطاء تنظمها كنيسة السيدة العذراء مريم – الفجالة.",
+                aboutP2: "نجتمع لنصنع الأسرّة والمكاتب والأدراج ونجهز الطعام، ثم نقدمها مجانًا للأسر المحتاجة.",
+                aboutP3: "إنه ليس مجرد عمل...",
+                aboutHighlight: "بل عبادة نعيشها.",
+                whatKicker: "ماذا نفعل؟",
+                activitiesTitle: "أيدٍ تخدم.",
+                activitiesIntro: "نعمل معًا ونصنع معًا ونعطي ما نصنعه للأسر التي تحتاج إليه.",
+                activity1: "صناعة الأسرّة والمكاتب والأدراج والأثاث.",
+                activity2: "تجهيز وتعبئة الطعام والاحتياجات الأساسية.",
+                activity3: "تنظيم وتوزيع كل ما نصنعه على الأسر المحتاجة.",
+                activity4: "نصلي وننمو ونبني صداقات.",
+                registerKicker: "التسجيل",
+                registerTitle: "مكانك يبدأ من هنا.",
+                registerDescription: "يمكنك التسجيل لنفسك أو حجز أكثر من شخص في نفس الوقت بسهولة.",
+                howManyPeople: "كم عدد الأشخاص المسجلين؟",
+                howManySub: "اختر العدد الإجمالي للمشاركين لملء بياناتهم.",
+                countLabel: "عدد المشاركين:",
+                personLabel: "الشخص",
+                fullName: "الاسم بالكامل",
+                fullNamePlaceholder: "اكتب الاسم بالكامل",
+                email: "البريد الإلكتروني",
+                emailPlaceholder: "اكتب البريد الإلكتروني",
+                phone: "رقم الهاتف",
+                phonePlaceholder: "01XXXXXXXXX",
+                nationalId: "الرقم القومي",
+                nationalIdPlaceholder: "14 رقمًا",
+                workField: "مجال الخدمة",
+                selectWorkField: "اختر مجال الخدمة",
+                fieldKids: "أطفال",
+                fieldProduction: "خط إنتاج",
+                fieldIroning: "مكوة",
+                fieldWardrobes: "دواليب",
+                fieldDesks: "مكاتب",
+                fieldBeds: "سراير",
+                tshirtSize: "مقاس التيشرت",
+                selectSize: "اختر المقاس",
+                stayDuration: "كيف سيشارك هذا الشخص؟",
+                twoNights: "ليلتان",
+                twoNightsDesc: "إقامة كاملة",
+                oneNight: "ليلة واحدة",
+                oneNightDesc: "إقامة ليلة واحدة",
+                dayUse: "يوم فقط",
+                dayUseDesc: "حضور يومي فقط",
+                busOptionTitle: "الانتقال بالأتوبيس",
+                busOptionDesc: "علم على المربع إذا كان هذا الشخص يريد الحجز في أتوبيس الكنيسة",
+                totalFeeLabel: "إجمالي رسوم الاشتراك",
+                calculatedNote: "يتم حسابها تلقائيًا حسب نوع الإقامة لكل شخص",
+                confirmation: "أؤكد أن جميع البيانات التي أدخلتها لجميع الأشخاص صحيحة.",
+                continuePayment: "الانتقال إلى الدفع",
+                securePayment: "دفع آمن عن طريق Visa أو Mastercard أو المحافظ الإلكترونية بواسطة Paymob.",
+                rights: "جميع الحقوق محفوظة."
+            }
+        };
+
+        /* Current state */
+        let currentLang = localStorage.getItem("workingCampLanguage") || "en";
+
+        /* Language Dropdown Mechanics (Click Toggle & Persistent) */
+        const languageDropdown = document.getElementById("languageDropdown");
+        const languageBtn = document.getElementById("languageBtn");
+        const currentLanguageText = document.getElementById("currentLanguage");
+
+        languageBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            languageDropdown.classList.toggle("is-open");
+        });
+
+        document.addEventListener("click", function () {
+            languageDropdown.classList.remove("is-open");
+        });
+
+        document.querySelectorAll("[data-lang]").forEach(function (button) {
+            button.addEventListener("click", function (e) {
+                e.stopPropagation();
+                const lang = button.dataset.lang;
+                setLanguage(lang);
+                languageDropdown.classList.remove("is-open");
+            });
+        });
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const dict = translations[lang] || translations.en;
+
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+            document.querySelectorAll("[data-i18n]").forEach(function (element) {
+                const key = element.dataset.i18n;
+                if (dict[key] !== undefined) {
+                    element.innerHTML = dict[key];
+                }
+            });
+
+            if (lang === "ar") {
+                currentLanguageText.textContent = "العربية";
+            } else if (lang === "fr") {
+                currentLanguageText.textContent = "Français";
+            } else {
+                currentLanguageText.textContent = "English";
+            }
+
+            localStorage.setItem("workingCampLanguage", lang);
+            renderAttendeeForms();
+        }
+
+
+        /* =====================================================
+           DYNAMIC ATTENDEE FORM & PRICE CALCULATION
+        ===================================================== */
+
+        const attendeeCountSelect = document.getElementById("attendeeCountSelect");
+        const attendeesContainer = document.getElementById("attendeesContainer");
+        const totalPriceDisplay = document.getElementById("totalPriceDisplay");
+
+        attendeeCountSelect.addEventListener("change", function () {
+            renderAttendeeForms();
+        });
+
+        function renderAttendeeForms() {
+            const count = parseInt(attendeeCountSelect.value, 10);
+            const dict = translations[currentLang] || translations.en;
+
+            const savedData = [];
+            for (let i = 0; i < count; i++) {
+                const nameInput = document.getElementById(`fullName_${i}`);
+                const emailInput = document.getElementById(`email_${i}`);
+                const phoneInput = document.getElementById(`phone_${i}`);
+                const natIdInput = document.getElementById(`nationalId_${i}`);
+                const fieldInput = document.getElementById(`workField_${i}`);
+                const sizeInput = document.getElementById(`tshirtSize_${i}`);
+                const stayInput = document.querySelector(`input[name="stayDuration_${i}"]:checked`);
+                const busInput = document.getElementById(`bus_${i}`);
+
+                savedData.push({
+                    fullName: nameInput ? nameInput.value : "",
+                    email: emailInput ? emailInput.value : "",
+                    phone: phoneInput ? phoneInput.value : "",
+                    nationalId: natIdInput ? natIdInput.value : "",
+                    workField: fieldInput ? fieldInput.value : "",
+                    tshirtSize: sizeInput ? sizeInput.value : "",
+                    stayDuration: stayInput ? stayInput.value : "2-nights",
+                    bus: busInput ? busInput.checked : false
+                });
+            }
+
+            attendeesContainer.innerHTML = "";
+
+            for (let i = 0; i < count; i++) {
+                const data = savedData[i] || { stayDuration: "2-nights", bus: false };
+
+                const cardHtml = `
+                    <div class="attendee-card" data-attendee-index="${i}">
+                        <div class="attendee-card-header">
+                            <div class="attendee-number-badge">${i + 1}</div>
+                            <h4>${dict.personLabel} #${i + 1}</h4>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <!-- Full Name -->
+                            <div class="field full">
+                                <label for="fullName_${i}">${dict.fullName}</label>
+                                <input
+                                    type="text"
+                                    id="fullName_${i}"
+                                    name="fullName_${i}"
+                                    required
+                                    value="${escapeHtml(data.fullName)}"
+                                    placeholder="${dict.fullNamePlaceholder}"
+                                >
+                            </div>
+
+                            <!-- Email -->
+                            <div class="field">
+                                <label for="email_${i}">${dict.email}</label>
+                                <input
+                                    type="email"
+                                    id="email_${i}"
+                                    name="email_${i}"
+                                    required
+                                    value="${escapeHtml(data.email)}"
+                                    placeholder="${dict.emailPlaceholder}"
+                                >
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="field">
+                                <label for="phone_${i}">${dict.phone}</label>
+                                <input
+                                    type="tel"
+                                    id="phone_${i}"
+                                    name="phone_${i}"
+                                    required
+                                    value="${escapeHtml(data.phone)}"
+                                    placeholder="${dict.phonePlaceholder}"
+                                >
+                            </div>
+
+                            <!-- National ID -->
+                            <div class="field full">
+                                <label for="nationalId_${i}">${dict.nationalId}</label>
+                                <input
+                                    type="text"
+                                    id="nationalId_${i}"
+                                    name="nationalId_${i}"
+                                    required
+                                    minlength="14"
+                                    maxlength="14"
+                                    pattern="[0-9]{14}"
+                                    inputmode="numeric"
+                                    value="${escapeHtml(data.nationalId)}"
+                                    placeholder="${dict.nationalIdPlaceholder}"
+                                >
+                            </div>
+
+                            <!-- Service / Work Field -->
+                            <div class="field">
+                                <label for="workField_${i}">${dict.workField}</label>
+                                <select id="workField_${i}" name="workField_${i}" required>
+                                    <option value="" disabled ${!data.workField ? 'selected' : ''}>${dict.selectWorkField}</option>
+                                    <option value="children" ${data.workField === 'children' ? 'selected' : ''}>${dict.fieldKids}</option>
+                                    <option value="production-line" ${data.workField === 'production-line' ? 'selected' : ''}>${dict.fieldProduction}</option>
+                                    <option value="ironing" ${data.workField === 'ironing' ? 'selected' : ''}>${dict.fieldIroning}</option>
+                                    <option value="wardrobes" ${data.workField === 'wardrobes' ? 'selected' : ''}>${dict.fieldWardrobes}</option>
+                                    <option value="desks" ${data.workField === 'desks' ? 'selected' : ''}>${dict.fieldDesks}</option>
+                                    <option value="beds" ${data.workField === 'beds' ? 'selected' : ''}>${dict.fieldBeds}</option>
+                                </select>
+                            </div>
+
+                            <!-- T-Shirt Size -->
+                            <div class="field">
+                                <label for="tshirtSize_${i}">${dict.tshirtSize}</label>
+                                <select id="tshirtSize_${i}" name="tshirtSize_${i}" required>
+                                    <option value="" disabled ${!data.tshirtSize ? 'selected' : ''}>${dict.selectSize}</option>
+                                    <option value="S" ${data.tshirtSize === 'S' ? 'selected' : ''}>Small (S)</option>
+                                    <option value="M" ${data.tshirtSize === 'M' ? 'selected' : ''}>Medium (M)</option>
+                                    <option value="L" ${data.tshirtSize === 'L' ? 'selected' : ''}>Large (L)</option>
+                                    <option value="XL" ${data.tshirtSize === 'XL' ? 'selected' : ''}>X-Large (XL)</option>
+                                    <option value="XXL" ${data.tshirtSize === 'XXL' ? 'selected' : ''}>XX-Large (XXL)</option>
+                                    <option value="XXXL" ${data.tshirtSize === 'XXXL' ? 'selected' : ''}>3X-Large (3XL)</option>
+                                </select>
+                            </div>
+
+                            <!-- Stay Duration Selection -->
+                            <div class="duration-field">
+                                <label class="duration-label">${dict.stayDuration}</label>
+
+                                <div class="duration-grid">
+                                    <label class="duration-option">
+                                        <input
+                                            type="radio"
+                                            name="stayDuration_${i}"
+                                            value="2-nights"
+                                            ${data.stayDuration === '2-nights' ? 'checked' : ''}
+                                            required
+                                            onchange="calculateTotalPrice()"
+                                        >
+                                        <span class="duration-card">
+                                            <strong>${dict.twoNights}</strong>
+                                            <span>${dict.twoNightsDesc}</span>
+                                            <span class="price-tag">150 EGP</span>
+                                        </span>
+                                    </label>
+
+                                    <label class="duration-option">
+                                        <input
+                                            type="radio"
+                                            name="stayDuration_${i}"
+                                            value="1-night"
+                                            ${data.stayDuration === '1-night' ? 'checked' : ''}
+                                            onchange="calculateTotalPrice()"
+                                        >
+                                        <span class="duration-card">
+                                            <strong>${dict.oneNight}</strong>
+                                            <span>${dict.oneNightDesc}</span>
+                                            <span class="price-tag">100 EGP</span>
+                                        </span>
+                                    </label>
+
+                                    <label class="duration-option">
+                                        <input
+                                            type="radio"
+                                            name="stayDuration_${i}"
+                                            value="day-use"
+                                            ${data.stayDuration === 'day-use' ? 'checked' : ''}
+                                            onchange="calculateTotalPrice()"
+                                        >
+                                        <span class="duration-card">
+                                            <strong>${dict.dayUse}</strong>
+                                            <span>${dict.dayUseDesc}</span>
+                                            <span class="price-tag">50 EGP</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Bus Option Card (+100 EGP) -->
+                            <label class="bus-option-card">
+                                <div class="bus-left">
+                                    <input
+                                        type="checkbox"
+                                        id="bus_${i}"
+                                        name="bus_${i}"
+                                        ${data.bus ? 'checked' : ''}
+                                        onchange="calculateTotalPrice()"
+                                    >
+                                    <div class="bus-option-card-text">
+                                        <strong>🚌 ${dict.busOptionTitle}</strong>
+                                        <span>${dict.busOptionDesc}</span>
+                                    </div>
+                                </div>
+                                <span class="bus-price-tag">+100 EGP</span>
+                            </label>
+
+                        </div>
+                    </div>
+                `;
+
+                attendeesContainer.insertAdjacentHTML("beforeend", cardHtml);
+            }
+
+            calculateTotalPrice();
+        }
+
+        function calculateTotalPrice() {
+            const count = parseInt(attendeeCountSelect.value, 10);
+            let total = 0;
+
+            for (let i = 0; i < count; i++) {
+                // Add stay duration fee
+                const selectedStay = document.querySelector(`input[name="stayDuration_${i}"]:checked`);
+                if (selectedStay && PRICE_MAP[selectedStay.value]) {
+                    total += PRICE_MAP[selectedStay.value];
+                } else {
+                    total += PRICE_MAP['2-nights'];
+                }
+
+                // Add bus fee if checked (+100 EGP)
+                const busCheck = document.getElementById(`bus_${i}`);
+                if (busCheck && busCheck.checked) {
+                    total += BUS_FEE;
+                }
+            }
+
+            totalPriceDisplay.textContent = `${total} EGP`;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return "";
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        /* =====================================================
+           PAYMENT FORM SUBMISSION
+        ===================================================== */
+
+        const registrationForm = document.getElementById("registrationForm");
+
+        registrationForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const count = parseInt(attendeeCountSelect.value, 10);
+            const attendees = [];
+
+            for (let i = 0; i < count; i++) {
+                const stayRadio = document.querySelector(`input[name="stayDuration_${i}"]:checked`);
+                const busCheck = document.getElementById(`bus_${i}`);
+
+                attendees.push({
+                    fullName: document.getElementById(`fullName_${i}`).value,
+                    email: document.getElementById(`email_${i}`).value,
+                    phone: document.getElementById(`phone_${i}`).value,
+                    nationalId: document.getElementById(`nationalId_${i}`).value,
+                    workField: document.getElementById(`workField_${i}`).value,
+                    tshirtSize: document.getElementById(`tshirtSize_${i}`).value,
+                    stayDuration: stayRadio ? stayRadio.value : "2-nights",
+                    requiresBus: busCheck ? busCheck.checked : false
+                });
+            }
+
+            const payload = {
+                attendeeCount: count,
+                attendees: attendees
+            };
+
+            const payButton = registrationForm.querySelector(".pay-button");
+            const originalButtonContent = payButton.innerHTML;
+
+            payButton.disabled = true;
+            payButton.innerHTML = "Processing Payment...";
+
+            try {
+                const response = await fetch("/api/create-payment", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.paymentUrl) {
+                    window.location.href = result.paymentUrl;
+                    return;
+                }
+
+                throw new Error(result.message || "Unable to initiate payment session.");
+
+            } catch (error) {
+                console.error(error);
+                alert("Unable to start payment right now. Please check your connection or details and try again.");
+                payButton.disabled = false;
+                payButton.innerHTML = originalButtonContent;
+            }
+        });
+
+        /* Initial Load */
+        setLanguage(currentLang);
+
+    </script>
+</body>
+</html>
